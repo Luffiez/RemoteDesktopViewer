@@ -29,9 +29,9 @@ This program makes it a lot easier to keep track of and manage multiple connecti
 - Description
   - Describes the connection
 - Status
-  - Indicates if the connection is available, occupied or it the state is unknown.
+  - Indicates if the connection is available, occupied or if its state is unknown.
 - Adress
-  - refers to the connections ip-address. This could be a local address or a remote (as long ass you have access to it).
+  - refers to the connections ip-address. This could be a local or a remote address (as long ass you have access to it).
 
 <img src="./Images/RDV_Image.png" alt="drawing" width="500" heigth="500"/>
 
