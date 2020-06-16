@@ -35,6 +35,8 @@ This program makes it a lot easier to keep track of and manage multiple connecti
 
 <img src="./Images/RDV_Image.png" alt="drawing" width="500" heigth="500"/>
 
+## How to use it?
+If you do not wish to perform any changes of your own, simple download the RDVInstaller.msi file and run it to install the application.
 
 ## Other 
 
