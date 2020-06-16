@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Stations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <list>
+    <Station>
+      <Name>Localhost</Name>
+      <Type>My Localhost</Type>
+      <Status>Available</Status>
+      <Ip>127.0.0.1</Ip>
+      <Group>GroupA</Group>
+    </Station>
+    <Station>
+      <Name>Remote PC 1</Name>
+      <Type>My Localhost</Type>
+      <Status>Available</Status>
+      <Ip>192.168.0.666</Ip>
+      <Group>GroupB</Group>
+    </Station>
+    <Station>
+      <Name>Server 1</Name>
+      <Type>Git server</Type>
+      <Status>Available</Status>
+      <Ip>127.0.0.2</Ip>
+      <Group>GroupC</Group>
+    </Station>
+    <Station>
+      <Name>Server 2</Name>
+      <Type>Jenkins server</Type>
+      <Status>Available</Status>
+      <Ip>127.0.0.3</Ip>
+      <Group>GroupC</Group>
+    </Station>
+  </list>
+</Stations>
