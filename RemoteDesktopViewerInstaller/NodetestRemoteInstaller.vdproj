@@ -8287,7 +8287,7 @@
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
         "ProductVersion" = "8:1.1.0"
-        "Manufacturer" = "8:Syntronic"
+        "Manufacturer" = "8:Erik Rodriguez"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
         "Title" = "8:RemoteDesktopViewerInstaller"
