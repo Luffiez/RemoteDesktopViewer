@@ -45,10 +45,15 @@ If you wish to use the same connection list between multiple desktops, you can e
 
 Double-click on a connection to attempt to connect to it. You can also right-click a selected station for additional functions, such as:
 - Edit
+
 this allows you to quick-edit the details of the selected connection.
+
 - Join Sessions
+
 This option is only available if the connection is currently occupied. A request will be sent to active user asking if you may join the connection, allowing both of you to be connected at the same time (you as a session guest).
+
 - Take Over
+
 This option is also only available if the connection is currently occupied. This throws out the current user and allows you to take over the session.
 
 
