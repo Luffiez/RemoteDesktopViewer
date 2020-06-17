@@ -3,6 +3,7 @@ Creator: `Erik Rodriguez`
 
 Date published: `2020-06-16`
 
+[![Build Status](https://dev.azure.com/Luffiez123/Remote%20Desktop%20Viewer/_apis/build/status/Luffiez.RemoteDesktopViewer?branchName=master)](https://dev.azure.com/Luffiez123/Remote%20Desktop%20Viewer/_build/latest?definitionId=2&branchName=master)
 
 ## What is it?
 Remote Desktop Viewer is an open-source program which allows the user to maintain multiple RDP (Remote Desktop Protocol) connections. The program uses the Windows integrated application `Remote Desktop Connection` to maintain a connection between two desktops.
