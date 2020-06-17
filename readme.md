@@ -39,6 +39,10 @@ This program makes it a lot easier to keep track of and manage multiple connecti
 ## How to use it?
 If you do not wish to perform any changes of your own, simple download the RDVInstaller.msi file and run it to install the application.
 
+Once started, you can manage your list of connections by going to Settings/Station Settings.
+
+If you wish to use the same connection list between multiple desktops, you can easily export and import the list as an xml-file by going to Settings/Database -> export/import.
+
 ## Other 
 
 The icon used for the program was created by **Smashicons** and can be found [here](https://www.flaticon.com/free-icon/screens_2489379).
