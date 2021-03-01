@@ -1,4 +1,4 @@
-# Remote Desktop Viewer
+# [Remote Desktop Viewer V 1.0](https://github.com/Luffiez/RemoteDesktopViewer/releases/tag/Version_1)
 Creator: `Erik Rodriguez`
 
 Date published: `2020-06-16`
