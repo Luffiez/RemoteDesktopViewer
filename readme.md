@@ -1,6 +1,8 @@
 # Remote Desktop Viewer
 Creator: `Erik Rodriguez`
+
 Date published: `2020-06-16`
+
 Download: [Version 1.0](https://github.com/Luffiez/RemoteDesktopViewer/releases/tag/Version_1)
 
 [![Build Status](https://dev.azure.com/Luffiez123/Remote%20Desktop%20Viewer/_apis/build/status/Luffiez.RemoteDesktopViewer?branchName=master)](https://dev.azure.com/Luffiez123/Remote%20Desktop%20Viewer/_build/latest?definitionId=2&branchName=master)
