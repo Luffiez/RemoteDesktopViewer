@@ -24,38 +24,6 @@ Quser (query user) is a built-in Windows command line tool that is particularly 
 
 More info about it can be found [here](https://qtechbabble.wordpress.com/2017/04/07/use-quser-to-view-which-accounts-are-logged-inremoted-in-to-a-computer/).
 
-## Why use it?
-This program makes it a lot easier to keep track of and manage multiple connections. The user can easily create new connections and manage or remove existing ones. The program also allows for exporting and importing an xml of these connections, which helps if the program is used on multiple computers.
-
-- Name
-  - Specifies a name for the connection.
-- Description
-  - Describes the connection
-- Status
-  - Indicates if the connection is available, occupied or if its state is unknown.
-- Adress
-  - refers to the connections ip-address. This could be a local or a remote address (as long ass you have access to it).
-
-<img src="./Images/RDV_Image.png" alt="drawing" width="500" heigth="500"/>
-
-## How to use it?
-If you do not wish to perform any changes of your own, simple download the RDVInstaller.msi file and run it to install the application.
-
-Once started, you can manage your list of connections by going to Settings/Station Settings.
-
-If you wish to use the same connection list between multiple desktops, you can easily export and import the list as an xml-file by going to Settings/Database -> export/import.
-
-Double-click on a connection to attempt to connect to it. You can also right-click a selected station for additional functions, such as:
-### Edit
-this allows you to quick-edit the details of the selected connection.
-
-### Join Sessions
-This option is only available if the connection is currently occupied. A request will be sent to active user asking if you may join the connection, allowing both of you to be connected at the same time (you as a session guest).
-
-### Take Over
-This option is also only available if the connection is currently occupied. This throws out the current user and allows you to take over the session.
-
-
 ## Other 
 
 The icon used for the program was created by **Smashicons** and can be found [here](https://www.flaticon.com/free-icon/screens_2489379).
