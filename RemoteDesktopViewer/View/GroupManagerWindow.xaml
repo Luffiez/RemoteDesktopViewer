@@ -1,0 +1,99 @@
+﻿<Window x:Class="RemoteDesktopViewer.View.GroupManagerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Group Manager" Height="300" Width="530"
+        Icon="/Assets/folder.png"
+>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <DockPanel Grid.Row="0" Grid.ColumnSpan="2" Margin="2" >
+            <Border CornerRadius="6"
+                BorderBrush="LightGray"
+                Background="WhiteSmoke"
+                BorderThickness="1"
+                Padding="5,0,0,0">
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
+                    <TextBlock FontSize="14" Margin="0,5,5,0">Group Name:</TextBlock>
+                    <TextBox Name="GroupName" Width="400" Height="auto" Text="{Binding CurrentModel.GroupName}" FontSize="14" IsReadOnly="false"/>
+                </StackPanel>
+            </Border>
+        </DockPanel>
+        
+        <!-- Connection List -->
+        <DockPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="2">
+            <DataGrid Name="ConnectionList" ItemsSource="{Binding CurrentModel.GroupConnections}" AutoGenerateColumns="False" Background="WhiteSmoke">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding ConnectionName}" Header="Name" Width="125"/>
+                    <DataGridTextColumn Binding="{Binding ConnectionDescription}" Header="Description" Width="175"/>
+                    <DataGridTextColumn Binding="{Binding ConnectionAdress}" Header="Adress" Width="200"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </DockPanel>
+
+        <DockPanel Grid.Row="2" Grid.Column="0" Margin="2">
+            <Button Content="New" Width="75" Height="30" HorizontalAlignment="Left" Margin="5,0,5,0" Click="NewConnection_OnClick">
+                <Button.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="BorderBrush" Value="LightGray"/>
+                        <Setter Property="Background" Value="WhiteSmoke"/>
+                        <Setter Property="BorderThickness" Value="2"/>
+                    </Style>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="3"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Content="Delete" Width="75" Height="30" HorizontalAlignment="Left" Margin="5,0,5,0" Click="DeleteConnection_OnClick">
+                <Button.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="BorderBrush" Value="LightGray"/>
+                        <Setter Property="Background" Value="WhiteSmoke"/>
+                        <Setter Property="BorderThickness" Value="2"/>
+                    </Style>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="3"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </DockPanel>
+        
+        <DockPanel Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right">
+            <Button Content="Save and Exit" Width="110" Height="30"  Margin="5,0,5,0" Click="Save_OnClick">
+                <Button.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="BorderBrush" Value="LightGray"/>
+                        <Setter Property="Background" Value="WhiteSmoke"/>
+                        <Setter Property="BorderThickness" Value="2"/>
+                    </Style>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="3"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Content="Exit" Width="75" Height="30"  Margin="5,0,5,0" Click="Close_OnClick">
+                <Button.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="BorderBrush" Value="LightGray"/>
+                        <Setter Property="Background" Value="WhiteSmoke"/>
+                        <Setter Property="BorderThickness" Value="2"/>
+                    </Style>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="3"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </DockPanel>
+    </Grid>
+</Window>

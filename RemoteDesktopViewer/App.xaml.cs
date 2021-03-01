@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using RemoteDesktopViewer.View;
+using RemoteDesktopViewer.ViewModel;
 using System.Windows;
-using MahApps.Metro;
 
 namespace RemoteDesktopViewer
 {
@@ -14,6 +9,18 @@ namespace RemoteDesktopViewer
     /// </summary>
     public partial class App : Application
     {
-       
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            GroupManagerViewModel groupManagerViewModel = new GroupManagerViewModel();
+            MainWindowViewModel mainWindowViewModel = new MainWindowViewModel(groupManagerViewModel);
+
+            MainWindow window = new MainWindow(mainWindowViewModel, groupManagerViewModel);
+            window.DataContext = mainWindowViewModel;
+
+            GroupManagerWindow groupManagerWindow = new GroupManagerWindow(groupManagerViewModel);
+            groupManagerWindow.DataContext = groupManagerViewModel;
+            window.Show();
+        }
     }
 }

@@ -1,40 +1,25 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.29318.209
+VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemoteDesktopViewer", "RemoteDesktopViewer\RemoteDesktopViewer.csproj", "{4432A0FE-02B8-4C5E-B6DB-E990584B068D}"
-EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "RemoteDesktopViewerInstaller", "RemoteDesktopViewerInstaller\NodetestRemoteInstaller.vdproj", "{DFCB0309-8BEE-4182-B6DD-3F8F505DF99B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemoteDesktopViewer", "RemoteDesktopViewer\RemoteDesktopViewer.csproj", "{F6DFEFF2-9FFA-48FE-8118-25B330BA2724}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
-		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
-		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4432A0FE-02B8-4C5E-B6DB-E990584B068D}.Debug|Any CPU.ActiveCfg = Release|Any CPU
-		{4432A0FE-02B8-4C5E-B6DB-E990584B068D}.Debug|Any CPU.Build.0 = Release|Any CPU
-		{4432A0FE-02B8-4C5E-B6DB-E990584B068D}.Debug|x86.ActiveCfg = Debug|x86
-		{4432A0FE-02B8-4C5E-B6DB-E990584B068D}.Debug|x86.Build.0 = Debug|x86
-		{4432A0FE-02B8-4C5E-B6DB-E990584B068D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4432A0FE-02B8-4C5E-B6DB-E990584B068D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4432A0FE-02B8-4C5E-B6DB-E990584B068D}.Release|x86.ActiveCfg = Release|Any CPU
-		{4432A0FE-02B8-4C5E-B6DB-E990584B068D}.Release|x86.Build.0 = Release|Any CPU
-		{DFCB0309-8BEE-4182-B6DD-3F8F505DF99B}.Debug|Any CPU.ActiveCfg = Debug
-		{DFCB0309-8BEE-4182-B6DD-3F8F505DF99B}.Debug|x86.ActiveCfg = Debug
-		{DFCB0309-8BEE-4182-B6DD-3F8F505DF99B}.Debug|x86.Build.0 = Debug
-		{DFCB0309-8BEE-4182-B6DD-3F8F505DF99B}.Release|Any CPU.ActiveCfg = Release
-		{DFCB0309-8BEE-4182-B6DD-3F8F505DF99B}.Release|Any CPU.Build.0 = Release
-		{DFCB0309-8BEE-4182-B6DD-3F8F505DF99B}.Release|x86.ActiveCfg = Release
-		{DFCB0309-8BEE-4182-B6DD-3F8F505DF99B}.Release|x86.Build.0 = Release
+		{F6DFEFF2-9FFA-48FE-8118-25B330BA2724}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6DFEFF2-9FFA-48FE-8118-25B330BA2724}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6DFEFF2-9FFA-48FE-8118-25B330BA2724}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6DFEFF2-9FFA-48FE-8118-25B330BA2724}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {61B1FDD0-CE4F-41F4-A2A9-81FDF09BF2C8}
+		SolutionGuid = {3CE7A5C5-3489-428D-B8E6-736902DBBC51}
 	EndGlobalSection
 EndGlobal
