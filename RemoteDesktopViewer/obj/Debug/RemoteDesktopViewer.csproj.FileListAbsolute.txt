@@ -28,3 +28,4 @@ C:\Users\ereorid\source\repos\RemoteDesktopViewer\RemoteDesktopViewer\obj\Debug\
 C:\Users\ereorid\source\repos\RemoteDesktopViewer\RemoteDesktopViewer\obj\Debug\Themes\Button_RoundedCorners.baml
 C:\Users\ereorid\source\repos\RemoteDesktopViewer\RemoteDesktopViewer\bin\Debug\Newtonsoft.Json.dll
 C:\Users\ereorid\source\repos\RemoteDesktopViewer\RemoteDesktopViewer\bin\Debug\Newtonsoft.Json.xml
+C:\Users\ereorid\source\repos\RemoteDesktopViewer\RemoteDesktopViewer\obj\Debug\RemoteDesktopViewer.csprojAssemblyReference.cache

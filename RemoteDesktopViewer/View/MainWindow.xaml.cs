@@ -5,6 +5,7 @@ using RemoteDesktopViewer.Model;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System;
+using RemoteDesktopViewer.Functionality;
 
 namespace RemoteDesktopViewer
 {
@@ -66,26 +67,30 @@ namespace RemoteDesktopViewer
             }
         }
 
-        private void WindowActivated(object sender, EventArgs e)
-        {
-            if(mainWindowViewModel != null)
-                mainWindowViewModel.UpdateGroupStatus();
-        }
+        //private void WindowActivated(object sender, EventArgs e)
+        //{
+        //    if(mainWindowViewModel != null)
+        //        mainWindowViewModel.UpdateGroupStatus();
+        //}
 
         private void RightClick_EditStation(object sender, RoutedEventArgs e)
         {
             Debug.WriteLine("Right-clicked on station: " + e.Source.ToString());
         }
 
-        private void Group_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void Group_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Debug.WriteLine("Group selection changed: " + e.AddedItems[0]);
-            mainWindowViewModel.ChangeSelectedGroup(e.AddedItems[0] as ConnectionGroupModel);
+            if(e.AddedItems.Count > 0)
+            {
+                Debug.WriteLine("Group selection changed: " + e.AddedItems[0]);
+                mainWindowViewModel.ChangeSelectedGroup(e.AddedItems[0] as ConnectionGroupModel);
+            }
         }
 
-        private void Connection_OnClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void Connection_OnClick(object sender,MouseButtonEventArgs e)
         {
-            mainWindowViewModel.SetConnectionDetails(ConnectionList.SelectedIndex);
+            if(ConnectionList.Items.Count > 0)
+                mainWindowViewModel.UpdateConnectionStatus(ConnectionList.SelectedIndex);
         }
 
         private void Click_CreateGroup(object sender, RoutedEventArgs e)
@@ -120,6 +125,28 @@ namespace RemoteDesktopViewer
                 mainWindowViewModel.JoinStation(item);
                 Debug.WriteLine("Clicked on connect: " + e.Source.ToString());
             }
+        }
+
+        private void Click_ImportGroup(object sender, RoutedEventArgs e)
+        {
+            mainWindowViewModel.ImportGroup();
+        }
+
+        private void Click_ExportGroup(object sender, RoutedEventArgs e)
+        {
+            // opens the folder in explorer
+            Process.Start("explorer.exe", GroupManager.GROUP_PATH);
+        }
+
+        private void Click_Refresh(object sender, RoutedEventArgs e)
+        {
+            if (mainWindowViewModel != null)
+                mainWindowViewModel.RefreshGroupList();
+        }
+
+        private void HyperLink_Luffiez(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
+        {
+            System.Diagnostics.Process.Start(e.Uri.ToString());
         }
     }
 }

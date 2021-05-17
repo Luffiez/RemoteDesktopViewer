@@ -1,0 +1,23 @@
+{
+	"GroupName": "Example Group",
+	"GroupConnections": [
+		{
+			"ConnectionName": "My server",
+			"ConnectionDescription": "server description",
+			"ConnectionStatus": "",
+			"ConnectionAdress": "192.168.1.1",
+			"ConnectionID": null,
+			"ConnectionUser": null,
+			"LastUpdated": "0001-01-01T00:00:00"
+		},
+		{
+			"ConnectionName": "My server 2",
+			"ConnectionDescription": "server description 2",
+			"ConnectionStatus": "",
+			"ConnectionAdress": "192.168.1.1",
+			"ConnectionID": null,
+			"ConnectionUser": null,
+			"LastUpdated": "0001-01-01T00:00:00"
+		}
+	]
+}

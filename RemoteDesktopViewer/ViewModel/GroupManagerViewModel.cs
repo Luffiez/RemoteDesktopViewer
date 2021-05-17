@@ -2,7 +2,7 @@
 using RemoteDesktopViewer.Model;
 using RemoteDesktopViewer.View;
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace RemoteDesktopViewer.ViewModel
 {
@@ -23,7 +23,7 @@ namespace RemoteDesktopViewer.ViewModel
 
         private void OnGroupUpdated()
         {
-            EventHandler< ConnectionGroupModel> localCopy = GroupUpdated;
+            EventHandler<ConnectionGroupModel> localCopy = GroupUpdated;
 
             if(localCopy != null)
             {
@@ -49,7 +49,7 @@ namespace RemoteDesktopViewer.ViewModel
             ConnectionGroupModel copy = new ConnectionGroupModel();
 
             copy.GroupName = new string(model.GroupName.ToCharArray());
-            List<ConnectionModel> connections = new List<ConnectionModel>();
+            ObservableCollection<ConnectionModel> connections = new ObservableCollection<ConnectionModel>();
 
             foreach (ConnectionModel conn in model.GroupConnections)
             {
@@ -68,25 +68,24 @@ namespace RemoteDesktopViewer.ViewModel
 
         internal void DeleteConnection(ConnectionModel connectionToDelete)
         {
-            List<ConnectionModel> updatedGroup = new List<ConnectionModel>();
-            updatedGroup.AddRange(currentModel.GroupConnections);
-            updatedGroup.Remove(connectionToDelete);
-            CurrentModel.GroupConnections = updatedGroup;
+            if (CurrentModel.GroupConnections.Contains(connectionToDelete))
+            {
+                CurrentModel.GroupConnections.Remove(connectionToDelete);
+            }
         }
 
         public void OpenWindow_Create()
         {
             CurrentModel = new ConnectionGroupModel();
+            currentModel.GroupConnections = new ObservableCollection<ConnectionModel>();
             window = new GroupManagerWindow(this);
             window.ShowDialog();
         }
 
         internal void SaveGroup()
         {
-            // Save Model
             GroupManager.SaveGroup(originalModel, CurrentModel);
             OnGroupUpdated();
-            //originalModel = CurrentModel;
         }
 
         internal void CreateNewConnection()
@@ -97,11 +96,16 @@ namespace RemoteDesktopViewer.ViewModel
             newConnection.ConnectionStatus = "???";
             newConnection.ConnectionAdress = "???";
 
-            List<ConnectionModel> updatedGroup = new List<ConnectionModel>();
+            ObservableCollection<ConnectionModel> updatedGroup = new ObservableCollection<ConnectionModel>();
             if (CurrentModel.GroupConnections != null)
-                updatedGroup.AddRange(currentModel.GroupConnections);
+            {
+                foreach (var connection in currentModel.GroupConnections)
+                {
+                    updatedGroup.Add(connection);
+                }
+            }
             else
-                CurrentModel.GroupConnections = new List<ConnectionModel>();
+                CurrentModel.GroupConnections = new ObservableCollection<ConnectionModel>();
 
             updatedGroup.Add(newConnection);
 

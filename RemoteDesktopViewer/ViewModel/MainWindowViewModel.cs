@@ -1,7 +1,10 @@
-﻿using RemoteDesktopViewer.Functionality;
+﻿using Microsoft.Win32;
+using RemoteDesktopViewer.Functionality;
 using RemoteDesktopViewer.Model;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace RemoteDesktopViewer.ViewModel
 {
@@ -47,31 +50,23 @@ namespace RemoteDesktopViewer.ViewModel
         public MainWindowViewModel(GroupManagerViewModel _groupManagerViewModel)
         {
             ConnectionGroupModel = new ConnectionGroupModel();
-            connectionDetails = new ConnectionDetailsModel();
+            ConnectionDetails = new ConnectionDetailsModel();
             groupManagerViewModel = _groupManagerViewModel;
             MainWindowModel = new MainWindowModel();
             statusUpdater = new UpdateConnectionStatus();
             connectionManager = new ConnectionManager();
-
             groupManagerViewModel.GroupUpdated += GroupManagerViewModel_GroupUpdated;
 
-            MainWindowModel.Groups = GroupManager.LoadGroups();
-            MainWindowModel.Connections = GetConnections();
-
-            if (MainWindowModel.Connections.Count > 0)
-            {
-                SetConnectionDetails(0);
-                UpdateGroupStatus();
-            }
+            RefreshGroupList();
         }
 
         private void GroupManagerViewModel_GroupUpdated(object sender, ConnectionGroupModel group)
         {
             int id = MainWindowModel.Groups.IndexOf(GroupBeingEdited);
-            
-            if(id == -1) // We just created a new group (e), so we should add it to the list.
+
+            if (id == -1) // We just created a new group (e), so we should add it to the list.
             {
-                MainWindowModel.AddGroup(group);
+                MainWindowModel.Groups.Add(group);
             }
             else
             {
@@ -79,43 +74,28 @@ namespace RemoteDesktopViewer.ViewModel
                 MainWindowModel.Groups[id].GroupName = group.GroupName;
                 GroupBeingEdited = null;
             }
-            
+
             ChangeSelectedGroup(group);
         }
 
         public IList<ConnectionModel> GetConnections()
         {
-            return MainWindowModel.Groups[0].GroupConnections;
+            if (MainWindowModel.Groups.Count > 0)
+                return MainWindowModel.Groups[0].GroupConnections;
+            else
+                return null;
         }
 
-        public IList<ConnectionGroupModel> GetGroups()
+        internal void DeleteGroup(ConnectionGroupModel group)
         {
-            List<ConnectionModel> connections1 = new List<ConnectionModel>
+            MessageBoxResult result = MessageBox.Show($"Are you sure you want to delete '{group.GroupName}'?", "Delete group?", MessageBoxButton.YesNo);
+
+            if (MainWindowModel.Groups.Contains(group) && result == MessageBoxResult.Yes)
             {
-                new ConnectionModel{ ConnectionName = "1001", ConnectionDescription = "Enc 6120", ConnectionStatus= "Available", ConnectionAdress = "segaee0015.eipu.ericsson.se"},
-                new ConnectionModel{ ConnectionName = "1002", ConnectionDescription = "Rbs 6101", ConnectionStatus= "Available", ConnectionAdress = "segaee0031.eipu.ericsson.se"},
-                new ConnectionModel{ ConnectionName = "1003", ConnectionDescription = "Enc 6150", ConnectionStatus= "Occupied", ConnectionAdress = "segaee0029.eipu.ericsson.se"}
-            };
-
-            List<ConnectionModel> connections2 = new List<ConnectionModel>
-            {
-                new ConnectionModel{ ConnectionName = "9901", ConnectionDescription = "PRTT", ConnectionStatus= "Occupied", ConnectionAdress = "segaee0038.eipu.ericsson.se"},
-                new ConnectionModel{ ConnectionName = "9902", ConnectionDescription = "PRTT", ConnectionStatus= "Available", ConnectionAdress = "segaee0030.eipu.ericsson.se"},
-                new ConnectionModel{ ConnectionName = "9904", ConnectionDescription = "PRTT", ConnectionStatus= "Unknown", ConnectionAdress = "segaee0009.eipu.ericsson.se"}
-            };
-
-            List<ConnectionGroupModel> groups = new List<ConnectionGroupModel>();
-
-            groups.Add(new ConnectionGroupModel { GroupName = "Node", GroupConnections = connections1 });
-            groups.Add(new ConnectionGroupModel { GroupName = "AM", GroupConnections = connections2 });
-
-            return groups;
-        }
-
-        internal void DeleteGroup(ConnectionGroupModel item)
-        {
-            if(MainWindowModel.Groups.Contains(item))
-                MainWindowModel.Groups.Remove(item);
+                MainWindowModel.Groups.Remove(group);
+                GroupManager.DeleteGroup(group);
+                ChangeSelectedGroup();
+            }
         }
 
         internal void JoinStation(ConnectionModel connection)
@@ -123,9 +103,13 @@ namespace RemoteDesktopViewer.ViewModel
             connectionManager.JoinStation(connection);
         }
 
-        internal void ChangeSelectedGroup(ConnectionGroupModel group)
+        internal void ChangeSelectedGroup(ConnectionGroupModel group = null)
         {
-            MainWindowModel.Connections = group.GroupConnections;
+            if (group != null)
+                MainWindowModel.Connections = group.GroupConnections;
+            else
+                MainWindowModel.Connections = null;
+
             UpdateGroupStatus();
         }
 
@@ -142,13 +126,39 @@ namespace RemoteDesktopViewer.ViewModel
             }
         }
 
-        internal void SetConnectionDetails(int index)
+        public async void UpdateConnectionStatus(int index)
         {
-            if (MainWindowModel.Connections.Count <= index || index < 0)
+
+            if (index == null ||MainWindowModel.Connections.Count <= index || index < 0)
                 return;
 
             ConnectionModel conn = MainWindowModel.Connections[index];
+            SetConnectionDetails(conn);
+            conn.ConnectionUser = string.Empty;
+            conn.ConnectionStatus = "Updating...";
+            Task statusTask = new Task(() => statusUpdater.GetConnectionStatus(conn));
 
+            statusTask.Start();
+            await statusTask;
+            SetConnectionDetails(conn);
+        }
+
+        internal void ImportGroup()
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+
+            Nullable<bool> result = dlg.ShowDialog();
+            if(result == true)
+            {
+                string fileName = dlg.FileName;
+                ConnectionGroupModel importedGroup = GroupManager.ImportGroup(fileName);
+                MainWindowModel.Groups.Add(importedGroup);
+
+            }
+        }
+
+        internal void SetConnectionDetails(ConnectionModel conn)
+        {
             string details = "";
             details += "Name: " + conn.ConnectionName + "\n";
             details += "Description: " + conn.ConnectionDescription + "\n";
@@ -157,23 +167,29 @@ namespace RemoteDesktopViewer.ViewModel
                 details += "User: " + conn.ConnectionUser + "\n";
             details += "Adress: " + conn.ConnectionAdress;
 
-            connectionDetails.ConnectionDetails = details;
+            ConnectionDetails.ConnectionDetails = details;
 
             string button = "Unknown";
             switch (conn.ConnectionStatus)
             {
-                case "Available":
-                    button = "Connect";
-                    break;
-                case "Occupied":
-                    button = "Join";
-                    break;
-                default:
-                    button = "Unknown";
-                    break;
+                case "Available": button = "Connect"; break;
+                case "Occupied": button = "Join"; break;
+                default: button = "Unknown"; break;
             }
 
-            connectionDetails.ConnectButton = button;
+            ConnectionDetails.ConnectButton = button;
+        }
+
+        internal void RefreshGroupList()
+        {
+            MainWindowModel.Groups = GroupManager.LoadGroups();
+            MainWindowModel.Connections = GetConnections();
+
+            if (MainWindowModel.Connections != null && MainWindowModel.Connections.Count > 0)
+            {
+                SetConnectionDetails(MainWindowModel.Connections[0]);
+                UpdateGroupStatus();
+            }
         }
     }
 }

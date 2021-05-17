@@ -5,16 +5,25 @@ VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemoteDesktopViewer", "RemoteDesktopViewer\RemoteDesktopViewer.csproj", "{F6DFEFF2-9FFA-48FE-8118-25B330BA2724}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Installer", "Installer\Installer.vdproj", "{D14EA1C7-DAAA-417A-964F-9E218C0B009D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		All|Any CPU = All|Any CPU
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F6DFEFF2-9FFA-48FE-8118-25B330BA2724}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F6DFEFF2-9FFA-48FE-8118-25B330BA2724}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6DFEFF2-9FFA-48FE-8118-25B330BA2724}.All|Any CPU.ActiveCfg = Release|Any CPU
+		{F6DFEFF2-9FFA-48FE-8118-25B330BA2724}.All|Any CPU.Build.0 = Release|Any CPU
+		{F6DFEFF2-9FFA-48FE-8118-25B330BA2724}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{F6DFEFF2-9FFA-48FE-8118-25B330BA2724}.Debug|Any CPU.Build.0 = Release|Any CPU
 		{F6DFEFF2-9FFA-48FE-8118-25B330BA2724}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6DFEFF2-9FFA-48FE-8118-25B330BA2724}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D14EA1C7-DAAA-417A-964F-9E218C0B009D}.All|Any CPU.ActiveCfg = Debug
+		{D14EA1C7-DAAA-417A-964F-9E218C0B009D}.Debug|Any CPU.ActiveCfg = Release
+		{D14EA1C7-DAAA-417A-964F-9E218C0B009D}.Debug|Any CPU.Build.0 = Release
+		{D14EA1C7-DAAA-417A-964F-9E218C0B009D}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

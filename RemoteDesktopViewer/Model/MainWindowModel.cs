@@ -1,28 +1,22 @@
-﻿using System;
+﻿using RemoteDesktopViewer.Functionality;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 
 namespace RemoteDesktopViewer.Model
 {
     public class MainWindowModel : BaseModel
     {
-        private IList<ConnectionGroupModel> groups;
+        private ObservableCollection<ConnectionGroupModel> groups;
         private IList<ConnectionModel> connections;
 
-        public void AddGroup(ConnectionGroupModel group)
-        {
-            Groups.Add(group);
-            OnPropertyChanged("Groups");
-        }
-
-        public IList<ConnectionGroupModel> Groups
+        public ObservableCollection<ConnectionGroupModel> Groups
         {
             get { return groups; }
             set
             {
+                groups = null;
                 groups = value;
+                groups.Sort();
                 OnPropertyChanged("Groups");
             }
         }

@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace RemoteDesktopViewer.Model
 {
     public class ConnectionModel : BaseModel
@@ -9,6 +11,7 @@ namespace RemoteDesktopViewer.Model
         private string connectionAdress;
         private string connectionID;
         private string connectionUser;
+        private DateTime lastUpdated;
 
 
         public string ConnectionName
@@ -86,6 +89,19 @@ namespace RemoteDesktopViewer.Model
             {
                 connectionUser = value;
                 OnPropertyChanged("ConnectionUser");
+            }
+        }
+
+        public DateTime LastUpdated
+        {
+            get
+            {
+                return lastUpdated;
+            }
+            set
+            {
+                lastUpdated = value;
+                OnPropertyChanged("LastUpdated");
             }
         }
     }

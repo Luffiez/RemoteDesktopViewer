@@ -5,19 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RemoteDesktopViewer"
         mc:Ignorable="d"
-        Title="Nodetest Remote" Height="440" Width="945" ResizeMode="NoResize"
+        Title="RemoteDesktopViewer" Height="440" Width="1000" ResizeMode="CanResize"
         Icon="/Assets/monitor.png"
-        Activated="WindowActivated"
 >
+        <!--Activated="WindowActivated"-->
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="730"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="230"/>
-            <RowDefinition Height="170"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="180"/>
+            <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
         <!-- Group List Area -->
@@ -30,8 +31,21 @@
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                         <Image Source="/Assets/folder.png" Width="20"/>
-                        <TextBlock HorizontalAlignment="Center" FontSize="18" Margin="5,0,60,0"><Run Text="Groups"/></TextBlock>
-                        <Button HorizontalAlignment="Right" Content="+" FontWeight="Black" Width="25" Click="Click_CreateGroup">
+                        <TextBlock HorizontalAlignment="Center" FontSize="18" Margin="5,0,70,0"><Run Text="Groups"/></TextBlock>
+                        <Button HorizontalAlignment="Right"  FontWeight="Normal" Width="20" Click="Click_Refresh">
+                            <Image Source="/Assets/refresh.png" Width="20"/>
+                            <Button.Resources>
+                                <Style TargetType="Button">
+                                    <Setter Property="BorderBrush" Value="LightGray"/>
+                                    <Setter Property="Background" Value="WhiteSmoke"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                </Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="5"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+                        <!--<Button HorizontalAlignment="Right" Content="New" FontWeight="Normal" Margin="5,0,0,0" Width="35" Click="Click_CreateGroup">
                             <Button.Resources>
                                 <Style TargetType="Button">
                                     <Setter Property="BorderBrush" Value="LightGray"/>
@@ -42,19 +56,27 @@
                                     <Setter Property="CornerRadius" Value="3"/>
                                 </Style>
                             </Button.Resources>
-                        </Button>
+                        </Button>-->
                     </StackPanel>
                     <Separator/>
-               
-                    <ListBox Background="WhiteSmoke" BorderThickness="0" x:Name="GroupList" ItemsSource="{Binding MainWindowModel.Groups}" HorizontalContentAlignment="Stretch" SelectionChanged="Group_SelectionChanged">
+            
+                    <ListBox Height="175" Width="170" 
+                             Background="WhiteSmoke" 
+                             BorderThickness="0" 
+                             x:Name="GroupList" 
+                             ItemsSource="{Binding MainWindowModel.Groups}" 
+                             HorizontalContentAlignment="Left" 
+                             SelectionChanged="Group_SelectionChanged" 
+                             ScrollViewer.VerticalScrollBarVisibility="Hidden" 
+                             ScrollViewer.HorizontalScrollBarVisibility="Hidden">
                         <ListBox.Resources>
                             <Style TargetType="{x:Type ListBoxItem}">
-                                <Setter Property="Height" Value="25"/>
+                                <Setter Property="Height" Value="20"/>
                                 <Style.Triggers>
                                     <Trigger Property="IsSelected" Value="True">
                                         <Setter Property="BorderThickness" Value="3"/>
                                         <Setter Property="BorderBrush" Value="#454545"/>
-                                        <Setter Property="Height" Value="30"/>
+                                        <Setter Property="Height" Value="20"/>
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
@@ -64,7 +86,8 @@
                                 <Grid Margin="1" HorizontalAlignment="Left">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="15" />
-                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="110" />
+
                                     </Grid.ColumnDefinitions>
                                     <Image Source="/Assets/circle_Smashicons.png" Grid.Column="0" Width="5" VerticalAlignment="Center" />
                                     <TextBlock Text="{Binding GroupName}" Grid.Column="1" VerticalAlignment="Center"/>
@@ -72,22 +95,22 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
 
-
                         <ListBox.ContextMenu>
                             <ContextMenu>
                                 <MenuItem Header="Create Group" Click="Click_CreateGroup"/>
                                 <MenuItem Header="Edit Group" Click="Click_EditGroup"/>
                                 <MenuItem Header="Delete Group" Click="Click_DeleteGroup"/>
+                                <MenuItem Header="Import Group" Click="Click_ImportGroup"/>
+                                <MenuItem Header="Export Group" Click="Click_ExportGroup"/>
                             </ContextMenu>
                         </ListBox.ContextMenu>
-
                     </ListBox>
                 </StackPanel>
             </Border>
         </DockPanel>
 
         <!-- Connection Info Area -->
-        <DockPanel Grid.Column="0" Grid.Row="2" Margin="2">
+        <DockPanel Grid.Column="0" Grid.Row="1" Margin="2">
             <Border CornerRadius="6"
                 BorderBrush="LightGray"
                 Background="WhiteSmoke"
@@ -97,8 +120,8 @@
                 <StackPanel >
                     <TextBlock HorizontalAlignment="Center" FontSize="18">Connection Details</TextBlock>
                     <Separator/>
-                    <TextBlock HorizontalAlignment="Left" Margin="10,5,5,5" Text="{Binding ConnectionDetails.ConnectionDetails}"/>
-                    <Button Content="{Binding ConnectionDetails.ConnectButton}" x:Name="ConnectButton" Margin="10,0,10,0" Click="Click_Connect">
+                    <TextBlock HorizontalAlignment="Left" Height="80" Margin="10,5,5,5" Text="{Binding ConnectionDetails.ConnectionDetails}"/>
+                    <Button Content="{Binding ConnectionDetails.ConnectButton}" x:Name="ConnectButton" Height="30" Margin="10,0,10,0" Click="Click_Connect">
                         <Button.Resources>
                             <Style TargetType="Button">
                                 <Setter Property="BorderBrush" Value="LightGray"/>
@@ -106,16 +129,18 @@
                                 <Setter Property="BorderThickness" Value="2"/>
                             </Style>
                             <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="3"/>
+                                <Setter Property="CornerRadius" Value="5"/>
                             </Style>
                         </Button.Resources>
                     </Button>
                 </StackPanel>
             </Border>
         </DockPanel>
-
+        <DockPanel Grid.Column="0" Grid.Row="2" Margin="2">
+            <TextBlock >Created by <Hyperlink NavigateUri="https://github.com/Luffiez" RequestNavigate="HyperLink_Luffiez">Luffiez</Hyperlink></TextBlock>
+        </DockPanel>
         <!-- Connection List -->
-        <DockPanel Grid.Column="1" Grid.RowSpan="2" Margin="2">
+        <DockPanel Grid.Column="1" Grid.RowSpan="3" Margin="2">
             <ListView Name="ConnectionList" 
                       ItemsSource="{Binding MainWindowModel.Connections}" 
                       MouseLeftButtonUp="Connection_OnClick" 
@@ -135,7 +160,7 @@
                         <MenuItem Header="Connect" Click="Click_Connect"/>
                         <MenuItem Name="JoinSession_MenuItem" Header="Join Session" Click="Click_Join"/>
                         <MenuItem Name="TakeOver_MenuItem" Header="Take Over" Click="Click_TakeOver"/>
-                        <MenuItem Header="Edit" Click="RightClick_EditStation"/>
+                        <!--<MenuItem Header="Edit" Click="RightClick_EditStation"/>-->
                     </ContextMenu>
                 </ListView.ContextMenu>
 

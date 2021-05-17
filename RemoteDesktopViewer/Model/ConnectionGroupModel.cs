@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.ObjectModel;
 
 namespace RemoteDesktopViewer.Model
 {
-    public class ConnectionGroupModel : BaseModel
+    public class ConnectionGroupModel : BaseModel, IComparable<ConnectionGroupModel>, IEquatable<ConnectionGroupModel>
     {
         private string groupName;
-        private IList<ConnectionModel> groupConnections;
+        private ObservableCollection<ConnectionModel> groupConnections;
 
         public string GroupName
         {
@@ -17,7 +18,7 @@ namespace RemoteDesktopViewer.Model
             }
         }
 
-        public IList<ConnectionModel> GroupConnections
+        public ObservableCollection<ConnectionModel> GroupConnections
         {
             get { return groupConnections; }
             set
@@ -25,6 +26,22 @@ namespace RemoteDesktopViewer.Model
                 groupConnections = value;
                 OnPropertyChanged("GroupConnections");
             }
+        }
+
+        public int CompareTo(ConnectionGroupModel other)
+        {
+            if (this.GroupName == other.groupName) 
+                return 0;
+
+            return this.GroupName.CompareTo(other.GroupName);
+        }
+
+        public bool Equals(ConnectionGroupModel other)
+        {
+            if (this.GroupName.Equals(other.groupName) && this.GroupConnections.Equals(other.groupConnections))
+                return true;
+
+            return false;
         }
     }
 }
