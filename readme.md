@@ -3,7 +3,7 @@ Creator: `Erik Rodriguez`
 
 Date published: `2021-05-17`
 
-Download: [Version 2.0.3](https://github.com/Luffiez/RemoteDesktopViewer/releases/tag/Version_1)
+Download: [Version 2.0.3](https://github.com/Luffiez/RemoteDesktopViewer/releases/tag/2.0.3)
 
 [![Build Status](https://dev.azure.com/Luffiez123/Remote%20Desktop%20Viewer/_apis/build/status/Luffiez.RemoteDesktopViewer?branchName=master)](https://dev.azure.com/Luffiez123/Remote%20Desktop%20Viewer/_build/latest?definitionId=2&branchName=master)
 
